@@ -99,7 +99,7 @@ export default function ListaPessoas() {
       }}
     >
       <h2 style={{ textAlign: 'center', marginBottom: 20 }}>
-        Listagem de Pessoas
+        Listagem de Clientes
       </h2>
 
       <Space style={{ marginBottom: 20 }}>
