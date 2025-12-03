@@ -24,7 +24,7 @@ export default function ListaPessoas() {
 
   // 🔹 Atualiza a lista conforme o tipo ou filtro
   function carregarLista() {
-    const dao = tipo === 'PF' ? pfDAO : pjDAO;
+    const dao = pfDAO;
     const lista = dao.listar();
 
     const filtrados = lista.filter((p) =>
@@ -39,7 +39,7 @@ export default function ListaPessoas() {
   }, [tipo, filtroNome]);
 
   function excluirPessoa(id) {
-    const dao = tipo === 'PF' ? pfDAO : pjDAO;
+    const dao = pfDAO;
     dao.excluir(id);
     message.success('Registro excluído com sucesso!');
     carregarLista();
@@ -57,8 +57,8 @@ export default function ListaPessoas() {
       key: 'email',
     },
     {
-      title: tipo === 'PF' ? 'CPF' : 'CNPJ',
-      dataIndex: tipo === 'PF' ? 'cpf' : 'cnpj',
+      title: tipo = 'CPF',
+      dataIndex: tipo = 'cpf',
       key: 'doc',
       width: 200,
     },
@@ -103,12 +103,6 @@ export default function ListaPessoas() {
       </h2>
 
       <Space style={{ marginBottom: 20 }}>
-        <Select
-          value={tipo}
-          onChange={(v) => setTipo(v)}
-          style={{ width: 200 }}
-          options={[{ value: 'PF', label: 'Pessoa Física' }]}
-        />
         <Input
           placeholder="Filtrar por nome"
           value={filtroNome}

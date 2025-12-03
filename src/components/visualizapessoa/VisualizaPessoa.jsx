@@ -10,7 +10,7 @@ export default function VisualizaPessoa() {
   const [pessoa, setPessoa] = useState(null);
 
   useEffect(() => {
-    const dao = tipo === 'PF' ? new PFDAO() : new PJDAO();
+    const dao = new PFDAO();
     const lista = dao.listar();
 
     // 🔹 Busca unificada pelo ID
@@ -42,7 +42,7 @@ export default function VisualizaPessoa() {
     >
       <Card
         title={`Detalhes da ${
-          tipo === 'PF' ? 'Pessoa Física' : 'Pessoa Jurídica'
+          tipo === 'Cliente';
         }`}
         bordered={false}
       >
@@ -50,11 +50,9 @@ export default function VisualizaPessoa() {
         <Descriptions.Item label="Nome">{pessoa.nome}</Descriptions.Item>
         <Descriptions.Item label="E-mail">{pessoa.email}</Descriptions.Item>
 
-        {tipo === 'PF' ? (
+
           <Descriptions.Item label="CPF">{pessoa.cpf}</Descriptions.Item>
-        ) : (
-          <Descriptions.Item label="CNPJ">{pessoa.cnpj}</Descriptions.Item>
-        )}
+        
 
         {/* Endereço */}
         <Descriptions.Item label="Endereço">

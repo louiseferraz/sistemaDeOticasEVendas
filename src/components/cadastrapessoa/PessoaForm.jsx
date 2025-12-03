@@ -90,7 +90,7 @@ export default function PessoaForm() {
       end.setUf(endVals.uf);
       end.setRegiao(endVals.regiao);
 
-      if (values.tipo === 'PF') {
+    
         const pf = new PF();
         pf.setNome(values.nome);
         pf.setEmail(values.email);
@@ -107,42 +107,10 @@ export default function PessoaForm() {
         }
 
         pessoa = pf;
-      } else {
-        const pj = new PJ();
-        pj.setNome(values.nome);
-        pj.setEmail(values.email);
-        pj.setCNPJ(values.cnpj);
-        pj.setEndereco(end);
-
-        if (values.ie) {
-          const ie = new IE();
-          ie.setNumero(values.ie.numero);
-          ie.setEstado(values.ie.estado);
-
-          // 👇 converte dayjs → string para salvar no DAO
-          const dr = values.ie.dataRegistro;
-          const dataRegistro =
-            dr && typeof dr === 'object' && typeof dr.format === 'function'
-              ? dr.format('YYYY-MM-DD')
-              : dr || '';
-
-          ie.setDataRegistro(dataRegistro);
-          pj.setIE(ie);
-        }
-
-        if (values.telefones?.length > 0) {
-          values.telefones.forEach((tel) => {
-            const fone = new Telefone();
-            fone.setDdd(tel.ddd);
-            fone.setNumero(tel.numero);
-            pj.addTelefone(fone);
-          });
-        }
-
-        pessoa = pj;
       }
+       
 
-      const dao = tipo === 'PF' ? pfDAO : pjDAO;
+      const dao = pfDAO;
       if (editando && id) {
         dao.atualizar(id, pessoa);
         message.success('Registro atualizado com sucesso!');
