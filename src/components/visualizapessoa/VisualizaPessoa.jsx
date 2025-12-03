@@ -41,9 +41,7 @@ export default function VisualizaPessoa() {
       }}
     >
       <Card
-        title={`Detalhes da ${
-          tipo === 'Cliente';
-        }`}
+        title={`Detalhes do Cliente`}
         bordered={false}
       >
         <Descriptions bordered column={1}></Descriptions>
