@@ -57,8 +57,8 @@ export default function ListaPessoas() {
       key: 'email',
     },
     {
-      title: tipo = 'CPF',
-      dataIndex: tipo = 'cpf',
+      title:'CPF',
+      dataIndex:'cpf',
       key: 'doc',
       width: 200,
     },
