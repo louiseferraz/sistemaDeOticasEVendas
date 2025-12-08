@@ -20,7 +20,7 @@ export default function ListaOculos() {
   const [filtroNome, setFiltroNome] = useState('');
   const [dados, setDados] = useState([]);
 
-  const OCULOSDAO = new OCULOSDAO();
+  const oculosDAO = new OCULOSDAO();
 
   // 🔹 Atualiza a lista conforme o tipo ou filtro
   function carregarLista() {

@@ -5,6 +5,7 @@ import {
   UserAddOutlined,
   UnorderedListOutlined,
   MenuOutlined,
+  AppstoreAddOutlined,
 } from '@ant-design/icons';
 
 const { Header, Content, Footer } = Layout;
@@ -34,12 +35,22 @@ function MainLayout() {
     {
       key: '/cadastrar',
       icon: <UserAddOutlined />,
-      label: <Link to="/cadastrar">Cadastrar</Link>,
+      label: <Link to="/cadastrar">Cadastrar Cliente</Link>,
     },
     {
       key: '/listar',
       icon: <UnorderedListOutlined />,
-      label: <Link to="/listar">Listar</Link>,
+      label: <Link to="/listar">Listar Clientes</Link>,
+    },
+    {
+      key: '/cadastraroculos',
+      icon: <AppstoreAddOutlined/>,
+      label: <Link to="/cadastraroculos">Cadastrar Óculos</Link>
+    },
+    {
+      key: '/listaroculos',
+      icon: <UnorderedListOutlined/>,
+      label: <Link to="/listaroculos">Listar Óculos</Link>
     },
   ];
 
