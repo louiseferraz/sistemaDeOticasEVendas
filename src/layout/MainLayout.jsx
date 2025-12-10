@@ -52,6 +52,16 @@ function MainLayout() {
       icon: <UnorderedListOutlined/>,
       label: <Link to="/listaroculos">Listar Óculos</Link>
     },
+    {
+      key: '/criarpedido',
+      icon: <AppstoreAddOutlined/>,
+      label: <Link to="/criarpedido">Criar Pedido</Link>
+    },
+    {
+      key: '/listarpedidos',
+      icon: <UnorderedListOutlined/>,
+      label: <Link to="/listarpedidos">Listar Pedidos</Link>
+    },
   ];
 
   return (

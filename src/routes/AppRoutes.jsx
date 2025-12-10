@@ -6,6 +6,8 @@ import ListaPessoas from '../components/listapessoas/ListaPessoas.jsx';
 import OculosForm from '../components/cadastraoculos/OculosForm.jsx';
 import VisualizaPessoa from '../components/visualizapessoa/VisualizaPessoa.jsx';
 import ListaOculos from '../components/listaoculos/ListaOculos.jsx';
+import PedidosForm from '../components/criarpedidos/PedidosForm.jsx';
+import ListaPedidos from '../components/listapedidos/ListaPedidos.jsx';
 
 function AppRoutes() {
   return (
@@ -17,6 +19,8 @@ function AppRoutes() {
         <Route path="listar" element={<ListaPessoas />} />
         <Route path="cadastraroculos" element={<OculosForm/>} />
         <Route path="listaroculos" element={<ListaOculos/>} />
+        <Route path="criarpedido" element={<PedidosForm/>} />
+        <Route path="listarpedidos" element={<ListaPedidos/>} />
         <Route path="visualizar/:tipo/:id" element={<VisualizaPessoa />} />
         <Route path="editar/:tipo/:id" element={<PessoaForm />} />
       </Route>

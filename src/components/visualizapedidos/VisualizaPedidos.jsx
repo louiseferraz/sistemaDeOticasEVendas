@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Descriptions, Button } from 'antd';
 import { useParams, useNavigate } from 'react-router-dom';
-import OCULOSDAO from '../../objetos/dao/OCULOSDAOLocal.mjs';
+import PEDIDOSDAO from '../../objetos/dao/PEDIDOSDAOLocal.mjs';
 
-export default function VisualizaOculos() {
+export default function VisualizaPedidos() {
   const { tipo, id } = useParams();
   const navigate = useNavigate();
 
-  const [oculos, setOculos] = useState(null);
+  const [pedidos, setPedidos] = useState(null);
 
   useEffect(() => {
-    const dao = new OCULOSDAO();
+    const dao = new PEDIDOSDAO();
     const lista = dao.listar();
 
     // 🔹 Busca unificada pelo ID
     const encontrada = lista.find((p) => p.id === id);
-    if (encontrada) setOculos(encontrada);
+    if (encontrada) setPedidos(encontrada);
   }, [tipo, id]);
 
-  if (!oculos) {
+  if (!pedidos) {
     return (
       <div style={{ textAlign: 'center', marginTop: 40 }}>
-        <h3>Nenhum modelo encontrado.</h3>
+        <h3>Nenhum pedido encontrado.</h3>
         <Button type="primary" onClick={() => navigate('/listar')}>
           Voltar à lista
         </Button>
@@ -41,13 +41,13 @@ export default function VisualizaOculos() {
       }}
     >
       <Card
-        title={`Detalhes do Óculos`}
+        title={`Detalhes do Pedido`}
         bordered={false}
       >
         <Descriptions bordered column={1}></Descriptions>
-        <Descriptions.Item label="Modelo">{oculos.modelo}</Descriptions.Item>
-        <Descriptions.Item label="Cor">{oculos.cor}</Descriptions.Item>
-        <Descriptions.Item label="Preço">{oculos.preco}</Descriptions.Item>
+        <Descriptions.Item label="Grau">{pedidos.grau}</Descriptions.Item>
+        <Descriptions.Item label="Data">{pedidos.data}</Descriptions.Item>
+        <Descriptions.Item label="Valor">{pedidos.valor}</Descriptions.Item>
 
         <div style={{ textAlign: 'center', marginTop: 24 }}>
           <Button

@@ -4,19 +4,19 @@ import { useParams, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 // === DAOs ===
-import OCULOSDAO from '../../objetos/dao/OCULOSDAOLocal.mjs';
+import PEDIDOSDAO from '../../objetos/dao/PEDIDOSDAOLocal.mjs';
 
 // === Classes ===
-import Oculos from '../../objetos/oculos/Oculos.mjs';
+import Pedidos from '../../objetos/pedidos/Pedidos.mjs';
 
-export default function OculosForm() {
-  const [tipo, setTipo] = useState('OCULOS');
+export default function PedidosForm() {
+  const [tipo, setTipo] = useState('PEDIDOS');
   const [editando, setEditando] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const { tipo: tipoParam, id } = useParams();
 
-  const oculosDAO = new OCULOSDAO();
+  const pedidosDAO = new PEDIDOSDAO();
 
   // =========================
   // EFEITO: Carregar dados no modo edição
@@ -26,7 +26,7 @@ export default function OculosForm() {
       setEditando(true);
       setTipo(tipoParam);
 
-      const dao = tipoParam === 'OCULOS';
+      const dao = tipoParam === 'PEDIDOS';
       const lista = dao.listar();
       const pessoa = lista.find((p) => p.id === id);
 
@@ -35,14 +35,14 @@ export default function OculosForm() {
 
         const valores = {
           tipo: tipoParam,
-          modelo: oculos.modelo,
-          cor: oculos.cor,
-          preco: oculos.preco,
+          grau: pedidos.grau,
+          data: pedidos.data,
+          valor: pedidos.valor,
         };
 
         form.setFieldsValue(valores);
       } else {
-        message.error('Óculos não encontrado!');
+        message.error('Pedido não encontrado!');
         navigate('/listar');
       }
     }
@@ -67,21 +67,21 @@ export default function OculosForm() {
   // =========================
   async function onFinish(values) {
     try {
-      let oculos;
+      let pedidos;
           
-        const modelo = new Oculos();
-        modelo.setModelo(values.modelo);
-        modelo.setCor(values.cor);
-        modelo.setPreco(values.preco);
+        const pedido = new Pedidos();
+        pedido.setGrau(values.grau);
+        pedido.setData(values.data);
+        pedido.setValor(values.valor);
 
-        modelo = modelo;
+        pedido = pedido;
            
-      const dao = OCULOSDAO;
+      const dao = PEDIDOSDAO;
       if (editando && id) {
-        dao.atualizar(id, oculos);
+        dao.atualizar(id, pedidos);
         message.success('Registro atualizado com sucesso!');
       } else {
-        dao.salvar(oculos);
+        dao.salvar(pedidos);
         message.success('Registro criado com sucesso!');
       }
 
@@ -118,7 +118,7 @@ export default function OculosForm() {
         }}
       >
         <h2 style={{ textAlign: 'center', marginBottom: 20 }}>
-          Cadastro de Modelos de Óculos
+          Cadastro de Pedidos
         </h2>
 
         <Form
@@ -128,27 +128,27 @@ export default function OculosForm() {
           scrollToFirstError
         >
           <Form.Item
-            label="Modelo"
-            name="modelo"
-            rules={[{ required: true, message: 'Informe o modelo!' }]}
+            label="Grau"
+            name="grau"
+            rules={[{ required: true, message: 'Informe o grau!' }]}
           >
-            <Input placeholder="Modelo do Óculos" />
+            <Input placeholder="Grau do Óculos" />
           </Form.Item>
 
           <Form.Item
-            label="Cor"
-            name="cor"
+            label="Data"
+            name="data"
             rules={[
-              { required: true, message: 'Informe a cor do modelo!' }
+              { required: true, message: 'Informe a data do pedido!' }
             ]}
           >
-            <Input placeholder="Cor do Óculos" />
+            <Input placeholder="Data do Pedido" />
           </Form.Item>
 
             <Form.Item
-              label="Preço"
-              name="preco"
-              rules={[{ required: true, message: 'Informe o preço!' }]}
+              label="Valor"
+              name="valor"
+              rules={[{ required: true, message: 'Informe o valor!' }]}
             >
               <Input placeholder="Somente números" maxLength={11} />
             </Form.Item>
