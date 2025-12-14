@@ -52,14 +52,14 @@ export default function ListaPedidos() {
       key: 'grau',
     },
     {
-      title: 'Data',
-      dataIndex: 'data',
-      key: 'data',
+      title: 'Modelo',
+      dataIndex: 'modelo',
+      key: 'modelo',
     },
     {
-      title:'Valor',
-      dataIndex:'valor',
-      key: 'valor',
+      title:'CPF',
+      dataIndex:'cpf',
+      key: 'cpf',
       width: 200,
     },
     {

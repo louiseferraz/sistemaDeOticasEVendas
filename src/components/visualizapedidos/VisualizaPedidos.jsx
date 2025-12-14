@@ -46,8 +46,8 @@ export default function VisualizaPedidos() {
       >
         <Descriptions bordered column={1}></Descriptions>
         <Descriptions.Item label="Grau">{pedidos.grau}</Descriptions.Item>
-        <Descriptions.Item label="Data">{pedidos.data}</Descriptions.Item>
-        <Descriptions.Item label="Valor">{pedidos.valor}</Descriptions.Item>
+        <Descriptions.Item label="Modelo">{pedidos.data}</Descriptions.Item>
+        <Descriptions.Item label="CPF">{pedidos.valor}</Descriptions.Item>
 
         <div style={{ textAlign: 'center', marginTop: 24 }}>
           <Button

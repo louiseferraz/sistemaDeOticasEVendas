@@ -36,9 +36,12 @@ export default function PedidosForm() {
         const valores = {
           tipo: tipoParam,
           grau: pedidos.grau,
-          data: pedidos.data,
-          valor: pedidos.valor,
+          data: pedidos.modelo,
         };
+
+        if (tipoParam === 'PEDIDOS') {
+          valores.cpf = pessoa.cpf;
+        }
 
         form.setFieldsValue(valores);
       } else {
@@ -49,20 +52,6 @@ export default function PedidosForm() {
   }, [id, tipoParam]);
 
   // =========================
-  // TROCA PF/PJ
-  // =========================
-  function onChangeTipo(e) {
-    const novoTipo = e.target.value;
-    setTipo(novoTipo);
-    const valoresAtuais = form.getFieldsValue();
-    form.resetFields();
-    form.setFieldsValue({
-      ...valoresAtuais,
-      tipo: novoTipo,
-    });
-  }
-
-  // =========================
   // SALVAR / ATUALIZAR
   // =========================
   async function onFinish(values) {
@@ -71,10 +60,10 @@ export default function PedidosForm() {
           
         const pedido = new Pedidos();
         pedido.setGrau(values.grau);
-        pedido.setData(values.data);
-        pedido.setValor(values.valor);
+        pedido.setModelo(values.modelo);
+        pedido.setCPF(values.cpf);
 
-        pedido = pedido;
+        pedidos = pedido;
            
       const dao = PEDIDOSDAO;
       if (editando && id) {
@@ -86,7 +75,7 @@ export default function PedidosForm() {
       }
 
       form.resetFields();
-      setTimeout(() => navigate('/listar'), 600);
+      setTimeout(() => navigate('/listarpedidos'), 600);
     } catch (erro) {
       console.error('❌ Erro ao salvar:', erro);
       message.error('Erro ao salvar registro: ' + erro.message);
@@ -136,22 +125,20 @@ export default function PedidosForm() {
           </Form.Item>
 
           <Form.Item
-            label="Data"
-            name="data"
-            rules={[
-              { required: true, message: 'Informe a data do pedido!' }
-            ]}
+            label="Modelo do Óculos"
+            name="modelo"
+            rules={[{ required: true, message: 'Informe o modelo!' }]}
           >
-            <Input placeholder="Data do Pedido" />
+            <Input placeholder="Grau do Óculos" />
           </Form.Item>
 
-            <Form.Item
-              label="Valor"
-              name="valor"
-              rules={[{ required: true, message: 'Informe o valor!' }]}
-            >
-              <Input placeholder="Somente números" maxLength={11} />
-            </Form.Item>
+          <Form.Item
+            label="CPF do Cliente"
+            name="cpf"
+            rules={[{ required: true, message: 'Informe o CPF!' }]}
+          >
+            <Input placeholder="Somente números" maxLength={11} />
+          </Form.Item>
 
           <Form.Item style={{ marginTop: 20 }}>
             <Button type="primary" htmlType="submit" block>
@@ -161,7 +148,7 @@ export default function PedidosForm() {
 
           {editando && (
             <Form.Item>
-              <Button block onClick={() => navigate('/listar')}>
+              <Button block onClick={() => navigate('/listarpedidos')}>
                 Cancelar
               </Button>
             </Form.Item>

@@ -1,8 +1,8 @@
 
 export default class Pedidos {
     #grau;
-    #data;
-    #valor;
+    #modelo;
+    #cpf;
   
     setGrau(grau) {
       if (grau) {
@@ -16,27 +16,27 @@ export default class Pedidos {
       return this.#grau;
     }
   
-    setData(data) {
-      if (data) {
-        this.#data = data;
+    setModelo(modelo) {
+      if (modelo) {
+        this.#modelo = modelo;
         return true;
       }
       return false;
     }
   
-    getData() {
-      return this.#data;
+    getModelo() {
+      return this.#modelo;
     }
   
-    setValor(valor) {
-      if (valor) {
-        this.#valor = valor;
+    setCPF(cpf) {
+      if (cpf) {
+        this.#cpf = cpf;
         return true;
       }
       return false;
     }
   
-    getValor() {
-      return this.#valor;
+    getCPF() {
+      return this.#cpf;
     }
   }

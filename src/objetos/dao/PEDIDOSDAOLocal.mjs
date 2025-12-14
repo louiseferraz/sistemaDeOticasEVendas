@@ -26,8 +26,8 @@ export default class PEDIDOSDAO {
     return {
       id: pedidos.id ?? this.gerarId(), // ← garante ID único
       grau: pedidos.getGrau?.(),
-      data: pedidos.getData?.(),
-      valor: pedidos.getValor?.(),
+      data: pedidos.getModelo?.(),
+      valor: pedidos.getCPF?.(),
     };
   }
 

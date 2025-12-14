@@ -74,9 +74,9 @@ export default function OculosForm() {
         modelo.setCor(values.cor);
         modelo.setPreco(values.preco);
 
-        modelo = modelo;
+        oculos = modelo;
            
-      const dao = OCULOSDAO;
+      const dao = oculosDAO;
       if (editando && id) {
         dao.atualizar(id, oculos);
         message.success('Registro atualizado com sucesso!');
@@ -86,7 +86,7 @@ export default function OculosForm() {
       }
 
       form.resetFields();
-      setTimeout(() => navigate('/listar'), 600);
+      setTimeout(() => navigate('/listaroculos'), 600);
     } catch (erro) {
       console.error('❌ Erro ao salvar:', erro);
       message.error('Erro ao salvar registro: ' + erro.message);
@@ -161,7 +161,7 @@ export default function OculosForm() {
 
           {editando && (
             <Form.Item>
-              <Button block onClick={() => navigate('/listar')}>
+              <Button block onClick={() => navigate('/listaroculos')}>
                 Cancelar
               </Button>
             </Form.Item>
