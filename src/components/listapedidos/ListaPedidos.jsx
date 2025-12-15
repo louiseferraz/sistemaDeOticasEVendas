@@ -17,7 +17,7 @@ export default function ListaPedidos() {
   const navigate = useNavigate();
 
   const [tipo, setTipo] = useState('PEDIDOS');
-  const [filtroNome, setFiltroNome] = useState('');
+  const [filtroGrau, setFiltroGrau] = useState('');
   const [dados, setDados] = useState([]);
 
   const pedidosDAO = new PEDIDOSDAO();
@@ -28,7 +28,7 @@ export default function ListaPedidos() {
     const lista = dao.listar();
 
     const filtrados = lista.filter((p) =>
-      p.nome?.toLowerCase().includes(filtroNome.toLowerCase())
+      p.grau?.toLowerCase().includes(filtroGrau.toLowerCase())
     );
 
     setDados(filtrados);
@@ -36,7 +36,7 @@ export default function ListaPedidos() {
 
   useEffect(() => {
     carregarLista();
-  }, [tipo, filtroNome]);
+  }, [tipo, filtroGrau]);
 
   function excluirPessoa(id) {
     const dao = pedidosDAO;
@@ -104,8 +104,8 @@ export default function ListaPedidos() {
 
       <Space style={{ marginBottom: 20 }}>
         <Input
-          placeholder="Filtrar por modelo"
-          value={filtroNome}
+          placeholder="Filtrar por grau"
+          value={filtroGrau}
           onChange={(e) => setFiltroNome(e.target.value)}
           allowClear
           style={{ width: 300 }}

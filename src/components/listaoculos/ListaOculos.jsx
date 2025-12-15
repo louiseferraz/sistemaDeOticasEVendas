@@ -17,7 +17,7 @@ export default function ListaOculos() {
   const navigate = useNavigate();
 
   const [tipo, setTipo] = useState('OCULOS');
-  const [filtroNome, setFiltroNome] = useState('');
+  const [filtroModelo, setFiltroModelo] = useState('');
   const [dados, setDados] = useState([]);
 
   const oculosDAO = new OCULOSDAO();
@@ -28,7 +28,7 @@ export default function ListaOculos() {
     const lista = dao.listar();
 
     const filtrados = lista.filter((p) =>
-      p.nome?.toLowerCase().includes(filtroNome.toLowerCase())
+      p.modelo?.toLowerCase().includes(filtroModelo.toLowerCase())
     );
 
     setDados(filtrados);
@@ -36,7 +36,7 @@ export default function ListaOculos() {
 
   useEffect(() => {
     carregarLista();
-  }, [tipo, filtroNome]);
+  }, [tipo, filtroModelo]);
 
   function excluirPessoa(id) {
     const dao = oculosDAO;
@@ -105,7 +105,7 @@ export default function ListaOculos() {
       <Space style={{ marginBottom: 20 }}>
         <Input
           placeholder="Filtrar por modelo"
-          value={filtroNome}
+          value={filtroModelo}
           onChange={(e) => setFiltroNome(e.target.value)}
           allowClear
           style={{ width: 300 }}
