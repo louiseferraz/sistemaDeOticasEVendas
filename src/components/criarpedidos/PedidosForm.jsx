@@ -40,7 +40,7 @@ export default function PedidosForm() {
         };
 
         if (tipoParam === 'PEDIDOS') {
-          valores.cpf = pessoa.cpf;
+          valores.cpf = pedidos.cpf;
         }
 
         form.setFieldsValue(valores);
@@ -65,7 +65,7 @@ export default function PedidosForm() {
 
         pedidos = pedido;
            
-      const dao = PEDIDOSDAO;
+      const dao = pedidosDAO;
       if (editando && id) {
         dao.atualizar(id, pedidos);
         message.success('Registro atualizado com sucesso!');
