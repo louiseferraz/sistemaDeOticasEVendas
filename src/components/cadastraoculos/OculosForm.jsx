@@ -28,9 +28,9 @@ export default function OculosForm() {
 
       const dao = tipoParam === 'OCULOS';
       const lista = dao.listar();
-      const pessoa = lista.find((p) => p.id === id);
+      const oculos = lista.find((p) => p.id === id);
 
-      if (pessoa) {
+      if (oculos) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
         const valores = {
@@ -43,7 +43,7 @@ export default function OculosForm() {
         form.setFieldsValue(valores);
       } else {
         message.error('Óculos não encontrado!');
-        navigate('/listar');
+        navigate('/listaroculos');
       }
     }
   }, [id, tipoParam]);

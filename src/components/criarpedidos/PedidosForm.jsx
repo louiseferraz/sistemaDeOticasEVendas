@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Radio, message } from 'antd';
+import { Form, Input, Button, Radio, Select,  message } from 'antd';
 import { useParams, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
@@ -28,15 +28,18 @@ export default function PedidosForm() {
 
       const dao = tipoParam === 'PEDIDOS';
       const lista = dao.listar();
+      const pedidos = lista.find((p) => p.id === id);
+      const modelo = lista.find((p) => p.id === id);
       const pessoa = lista.find((p) => p.id === id);
 
-      if (pessoa) {
+      if (pedidos) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
         const valores = {
           tipo: tipoParam,
           grau: pedidos.grau,
-          data: pedidos.modelo,
+          modelo: modelo.modelo,
+          cliente: pessoa.cpf,
         };
 
         if (tipoParam === 'PEDIDOS') {
@@ -46,7 +49,7 @@ export default function PedidosForm() {
         form.setFieldsValue(valores);
       } else {
         message.error('Pedido não encontrado!');
-        navigate('/listar');
+        navigate('/listarpedidos');
       }
     }
   }, [id, tipoParam]);
@@ -124,20 +127,22 @@ export default function PedidosForm() {
             <Input placeholder="Grau do Óculos" />
           </Form.Item>
 
-          <Form.Item
+          <Form.Item 
             label="Modelo do Óculos"
             name="modelo"
             rules={[{ required: true, message: 'Informe o modelo!' }]}
-          >
-            <Input placeholder="Grau do Óculos" />
+            >
+            <Select options={[{ label: 'Modelo', value: 'modelo' }]}
+             placeholder="Modelo do Óculos" />
           </Form.Item>
 
-          <Form.Item
+          <Form.Item 
             label="CPF do Cliente"
             name="cpf"
             rules={[{ required: true, message: 'Informe o CPF!' }]}
-          >
-            <Input placeholder="Somente números" maxLength={11} />
+            >
+            <Select options={[{ label: 'CPF', value: 'CPF' }]}
+             placeholder="CPF do Cliente" />
           </Form.Item>
 
           <Form.Item style={{ marginTop: 20 }}>
